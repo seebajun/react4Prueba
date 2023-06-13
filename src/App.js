@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import '../src/index.css'
+import "bootstrap/dist/css/bootstrap.min.css";
+import Miapi from "./Components/MiApi/Miapi.jsx";
+import Nav from "./Components/Nav/Nav.jsx";
+import Footer from './Components/Footer/Footer';
+import { useState } from 'react';
 
 function App() {
+  const [dataNav, setDataNav] = useState([]);
+  const [dataFiltrada, setDataFiltrada] = useState([]);
+
+  const handleFilteredData = (filteredData) => {
+    setDataFiltrada(filteredData);
+  };
+  const handleLoadedData = (e) => {
+    setDataNav(e);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <Nav onFilter={handleFilteredData} dataNav={dataNav} />
+      <Miapi onLoadData={handleLoadedData} dataFiltrada={dataFiltrada}/>
+      <Footer />
     </div>
   );
 }
